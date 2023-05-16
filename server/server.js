@@ -50,9 +50,21 @@ async function startServer() {
           { _id: new ObjectId(id)  },
           { $set: { status: status } }
         );
-        
-        console.log(id)
-        console.log("Request sent to mongo")
+        res.json(result);
+      } catch (error) {
+        console.error(`Failed to update order ${id}:`, error);
+        res.sendStatus(500);
+      }
+    });
+
+    app.put('/api/orders/neworder', async (req, res) => {
+      const id = req.params.id;
+      const { status: details } = req.body;
+      try {
+        const result = await ordersCollection.updateOne(
+          { _id: new ObjectId(id)  },
+          { $set: { status: details } }
+        );
         res.json(result);
       } catch (error) {
         console.error(`Failed to update order ${id}:`, error);

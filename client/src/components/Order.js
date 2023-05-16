@@ -21,18 +21,6 @@ function Order() {
   const [coffeeType, setCoffeeType] = useState('');
   const [specialRequirements, setSpecialRequirements] = useState('');
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
-
-  const handleCoffeeTypeChange = (event) => {
-    setCoffeeType(event.target.value);
-  };
-
-  const handleSpecialRequirementsChange = (event) => {
-    setSpecialRequirements(event.target.value);
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const order = { name, coffeeType, specialRequirements };
@@ -44,8 +32,22 @@ function Order() {
       console.error('Failed to submit order:', error);
       // TODO: show an error message to the user
     }
+    setName('');
+    setCoffeeType('');
+    setSpecialRequirements('');
   };
-  
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+
+  const handleCoffeeTypeChange = (event) => {
+    setCoffeeType(event.target.value);
+  };
+
+  const handleSpecialRequirementsChange = (event) => {
+    setSpecialRequirements(event.target.value);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
