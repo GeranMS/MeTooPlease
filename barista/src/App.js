@@ -8,29 +8,34 @@ function App() {
     // fetch orders from the server
     fetch('/api/orders')
       .then(response => response.json())
-      .then(data => setOrders(data))
-  }, [orders]);  
+      .then(data => setOrders(data));
+      
+  }, []);  
 
   const markOrderAsComplete = async (orderId) => {
     try {
-      const response = await fetch(`/api/orders/${orderId}/status`, {
+      
+      const requestOptions = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: 'Completed' }),
-      });
+      };
+      const response = await fetch(`/api/orders/${orderId}/status`, requestOptions);
       const updatedOrder = await response.json();
       setOrders(orders.map((order) => (order._id === updatedOrder._id ? updatedOrder : order)));
+      
     } catch (error) {
       console.error(error);
     }
-  };
-  
+  };  
 
   return (
     <div className="App">
-      <h1>Barista Interface</h1>
+      <h1>Outstanding Orders</h1>
       <ul>
-        {orders.map((order) => (
+      {orders
+        .filter((order) => order.status === "Pending") // Filter orders with status "Pending"
+        .map((order) => (
           <li key={order._id}>
             <p>{order.name}</p>
             <p>{order.coffeeType}</p>

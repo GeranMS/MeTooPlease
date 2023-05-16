@@ -1,7 +1,8 @@
+
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 
 const app = express();
 app.use(cors());
@@ -46,9 +47,12 @@ async function startServer() {
       const { status } = req.body;
       try {
         const result = await ordersCollection.updateOne(
-          { _id: ObjectId(id) },
+          { _id: new ObjectId(id)  },
           { $set: { status: status } }
         );
+        
+        console.log(id)
+        console.log("Request sent to mongo")
         res.json(result);
       } catch (error) {
         console.error(`Failed to update order ${id}:`, error);
@@ -83,6 +87,6 @@ async function startServer() {
   }
 }
 //test comment
-//tetstss
+//tetstsssssss
 
 startServer();
