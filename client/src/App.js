@@ -1,14 +1,15 @@
 import Order from './components/Order';
+import './App.css';
 
 function App() {
 
 
   return (
-    <div>
-
-      <h1>Order Coffee</h1>
-      <Order />
-
+    <div class="header-container">
+      <div class="header">
+        <h1>HOS</h1>
+        <Order />
+      </div>
     </div>
   )
 }

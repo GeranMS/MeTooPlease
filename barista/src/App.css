@@ -1,79 +1,90 @@
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #f1f1f1;
-}
 
-.container {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 40px 20px;
-  text-align: center;
-}
-
-.card {
-  background-color: #fff;
+.order-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  margin-bottom: 5px;
+  background-color: lightgrey;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-bottom: 20px;
 }
 
-.card-title {
+.order-box h2 {
   font-size: 24px;
-  font-weight: bold;
   margin-bottom: 10px;
 }
 
-.card-body {
-  font-size: 18px;
+.order-box p {
+  margin-bottom: 5px;
 }
 
-.form {
-  margin-top: 40px;
+.order-box .order-info {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
 }
 
-.form-input {
-  display: block;
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  font-size: 16px;
+.order-box .order-name {
+  margin-right: 10px;
 }
 
-.form-submit {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  background-color: #4CAF50;
-  color: #fff;
+.order-box .done-button {
+  background-color: yellow;
+  color: yellow;
+  padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 18px;
 }
 
-.table {
-  border-collapse: collapse;
-  width: 100%;
+.order-box .done-button:hover {
+  background-color: #350f14;
 }
 
-.table th,
-.table td {
-  padding: 8px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
+/* 
+.order-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: lightgrey;
+  border-radius: 8px;
 }
 
-.table th {
-  background-color: #f2f2f2;
-  font-size: 18px;
-  font-weight: bold;
+.order-box h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
-.table tr:hover {
-  background-color: #f5f5f5;
+.order-box p {
+  margin-bottom: 5px;
 }
+
+.order-box .order-info {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.order-box .order-name {
+  margin-right: 10px;
+}
+
+.order-box .done-button {
+  background-color: yellow;
+  color: yellow;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.order-box .done-button:hover {
+  background-color: #350f14;
+}
+
+ */
+
+
+

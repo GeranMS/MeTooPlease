@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { MongoClient, ObjectId } = require('mongodb');
+const http = require('http');
+const socketIO = require('socket.io');
 
 const app = express();
 app.use(cors());
@@ -11,6 +13,31 @@ app.use(bodyParser.json());
 const uri = "mongodb+srv://barend:Sanchez$9@coffee1.2zpgiw9.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 let ordersCollection;
+
+// // Create an HTTP server
+// const server = http.createServer(app);
+// const io = socketIO(server);
+
+// // Socket.io event handling
+// io.on('connection', (socket) => {
+//   console.log('A client connected');
+
+//   // Handle new order event
+//   socket.on('newOrder', async (order) => {
+//     try {
+//       const result = await ordersCollection.insertOne(order);
+//       const insertedOrder = result.ops[0];
+//       io.emit('order', insertedOrder);
+//     } catch (error) {
+//       console.error('Failed to insert order:', error);
+//     }
+//   });
+
+//   // Handle disconnect event
+//   socket.on('disconnect', () => {
+//     console.log('A client disconnected');
+//   });
+// });
 
 // Connect to MongoDB and start the server
 async function startServer() {
@@ -21,7 +48,11 @@ async function startServer() {
 
     // User client routes
     app.post('/api/orders', async (req, res) => {
+      
       const order = req.body;
+      // Add the orderTime property with the current timestamp
+      order.orderTime = new Date().toISOString();
+
       try {
         const result = await ordersCollection.insertOne(order);
         res.json(result.ops[0]);

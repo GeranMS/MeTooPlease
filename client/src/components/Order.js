@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Order.css';
 
 async function submitOrder(order) {
     const orderWithStatus = { ...order, status: "Pending" };
@@ -49,33 +50,62 @@ function Order() {
     setSpecialRequirements(event.target.value);
   };
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Name:
-        <input type="text" value={name} onChange={handleNameChange} />
-      </label>
-      <br />
-      <label>
-        Coffee Type:
-        <select value={coffeeType} onChange={handleCoffeeTypeChange}>
-          <option value="">Select a coffee type</option>
-          <option value="cortado">Cortado</option>
-          <option value="flat-white">Flat White</option>
-          <option value="latte">Latte</option>
-          <option value="red-cap">Red Cap</option>
-          <option value="espresso">Espresso</option>
-        </select>
-      </label>
-      <br />
-      <label>
-        Special Requirements:
-        <textarea value={specialRequirements} onChange={handleSpecialRequirementsChange} />
-      </label>
-      <br />
-      <button type="submit">Place Order</button>
-    </form>
-  );
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <label>
+//         Name:
+//         <input type="text" value={name} onChange={handleNameChange} />
+//       </label>
+//       <br />
+//       <label>
+//         Coffee Type:
+//         <select value={coffeeType} onChange={handleCoffeeTypeChange}>
+//           <option value="">Select a coffee type</option>
+//           <option value="cortado">Cortado</option>
+//           <option value="flat-white">Flat White</option>
+//           <option value="latte">Latte</option>
+//           <option value="red-cap">Red Cap</option>
+//           <option value="espresso">Espresso</option>
+//         </select>
+//       </label>
+//       <br />
+//       <label>
+//         Special Requirements:
+//         <textarea value={specialRequirements} onChange={handleSpecialRequirementsChange} />
+//       </label>
+//       <br />
+//       <button type="submit">Place Order</button>
+//     </form>
+//   );
+// }
+
+return (
+  <form className="order-form" onSubmit={handleSubmit} style={{ backgroundImage: `url('/images/coffePhoto.png')` }}>
+    <label>
+      Name:
+      <input type="text" className="input-field" value={name} onChange={handleNameChange} />
+    </label>
+    <br />
+    <label>
+      Coffee Type:
+      <select className="input-field" value={coffeeType} onChange={handleCoffeeTypeChange}>
+        <option value="">Select a coffee type</option>
+        <option value="cortado">Cortado</option>
+        <option value="flat-white">Flat White</option>
+        <option value="latte">Latte</option>
+        <option value="red-cap">Red Cap</option>
+        <option value="espresso">Espresso</option>
+      </select>
+    </label>
+    <br />
+    <label>
+      Special Requirements:
+      <textarea className="input-field" value={specialRequirements} onChange={handleSpecialRequirementsChange} />
+    </label>
+    <br />
+    <button type="submit" className="submit-button">Place Order</button>
+  </form>
+);
 }
 
 export default Order;
