@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'HopaCafe'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5BB21B5A1A46455BAA1711C150C037A2 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_06F385C4AC544917AABC9DE5DE19892F }}
           package: .
