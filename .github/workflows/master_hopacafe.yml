@@ -22,7 +22,7 @@ jobs:
           node-version: '16.x'
           
       - name: Change working directory
-        run: cd path/to/directory
+        run: cd server
 
       - name: npm install, build, and test
         run: |
