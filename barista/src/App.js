@@ -5,29 +5,6 @@ import io from 'socket.io-client';
 function App() {
   const [orders, setOrders] = useState([]);
 
-  // useEffect(() => {
-  //   // fetch orders from the server
-  //   fetch('/api/orders')
-  //     .then(response => response.json())
-  //     .then(data => setOrders(data));
-      
-  // }, []);  
-
-  // useEffect(() => {
-  //   // Create a WebSocket connection
-  //   const socket = io();
-
-  //   // Listen for 'order' event from the server
-  //   socket.on('order', (order) => {
-  //     setOrders((prevOrders) => [...prevOrders, order]); // Add the new order to the existing orders
-  //   });
-
-  //   return () => {
-  //     // Disconnect the WebSocket connection when component unmounts
-  //     socket.disconnect();
-  //   };
-  // }, []);
-
   const fetchOrders = async () => {
     try {
       const response = await fetch('/api/orders');
@@ -48,7 +25,6 @@ function App() {
 
   const markOrderAsComplete = async (orderId) => {
     try {
-      
       const requestOptions = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -56,12 +32,33 @@ function App() {
       };
       const response = await fetch(`/api/orders/${orderId}/status`, requestOptions);
       const updatedOrder = await response.json();
-      setOrders(orders.map((order) => (order._id === updatedOrder._id ? updatedOrder : order)));
-      
+      setOrders((prevOrders) =>
+        prevOrders.map((order) => (order._id === updatedOrder._id ? updatedOrder : order))
+      );
     } catch (error) {
       console.error(error);
     }
-  };  
+  };
+
+  const markAllOrdersAsComplete = async () => {
+    try {
+      const updatedOrders = orders.map(async (order) => {
+        const requestOptions = {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: 'Completed' }),
+        };
+        const response = await fetch(`/api/orders/${order._id}/status`, requestOptions);
+        const updatedOrder = await response.json();
+        return updatedOrder;
+      });
+  
+      const completedOrders = await Promise.all(updatedOrders);
+      setOrders(completedOrders);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const getTimeElapsed = (orderTime) => {
     const currentTime = new Date();
@@ -74,49 +71,6 @@ function App() {
     return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
 
-//   return (
-//     <div className="app-container" style={{ backgroundImage: `url('/images/coffePhoto.jpg')` }}>
-//       <div className="App">
-//         <h1>Outstanding Orders</h1>
-//         <ul>
-//           {orders
-//             .filter((order) => order.status === 'Pending')
-//             .map((order) => (
-//               <li key={order._id}>
-//                 <p>{order.name}</p>
-//                 <p>{order.coffeeType}</p>
-//                 <p>{order.specialRequirements}</p>
-//                 <button onClick={() => markOrderAsComplete(order._id)}>Done</button>
-//               </li>
-//             ))}
-//         </ul>
-//       </div>
-//     </div>
-//   );
-// }
-// );
-
-// return (
-//   <div className="App">
-//     <h1>Outstanding Orders</h1>
-//     <div className="order-container">
-//       {orders
-//         .filter((order) => order.status === "Pending")
-//         .map((order) => (
-//           <div className="order-box" key={order._id}>
-//             <h2>{order.name}</h2>
-//             <p>Order: {order.coffeeType}</p>
-//             <p>Note: {order.specialRequirements}</p>
-//             <p>Time Elapsed: {getTimeElapsed(order.orderTime)}</p>
-//             <button onClick={() => markOrderAsComplete(order._id)}>
-//               Done
-//             </button>
-//           </div>
-//         ))}
-//     </div>
-//   </div>
-// );
-
 function formatTimeElapsed(time) {
   const seconds = Math.floor((time / 1000) % 60);
   const minutes = Math.floor((time / (1000 * 60)) % 60);
@@ -128,7 +82,10 @@ function formatTimeElapsed(time) {
 return (
   <div className="App">
     <h1>Outstanding Orders</h1>
-    <div className="order-container">
+    <button className="clear-all-button" onClick={markAllOrdersAsComplete}>
+        All Done
+    </button>
+    <div className="order-container">      
       {orders
         .filter((order) => order.status === 'Pending')
         .map((order) => {

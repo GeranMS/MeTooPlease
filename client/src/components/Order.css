@@ -12,6 +12,20 @@
     height: 82vh; /* Set the height to 100% of the viewport height */
     border-radius: 8px;
   }  
+
+  .order-container {
+    position: relative;
+  }
+  
+  .error-message {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: red;
+    color: black;
+    padding: 10px;
+    border-radius: 50%;
+  }
   
   .input-field {
     margin-bottom: 10px;
