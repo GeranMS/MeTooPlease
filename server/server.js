@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const uri = "mongodb+srv://barend:P@@sword123@coffee1.2zpgiw9.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://barend:P%40%40sword123@coffee1.2zpgiw9.mongodb.net/";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 let ordersCollection;
 
