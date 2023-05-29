@@ -20,13 +20,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '16.x' 
-          
-      - name: Navigate to server directory
-        run: cd server
 
       - name: npm install, build
         run: |
-          npm install
+          cd server
+          npm ci
           npm run build --if-present
         timeout-minutes: 20
 
