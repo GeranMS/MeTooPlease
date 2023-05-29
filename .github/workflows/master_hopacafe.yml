@@ -19,7 +19,10 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v1
         with:
-          node-version: '16.x'       
+          node-version: '16.x' 
+          
+      - name: Navigate to server directory
+        run: cd server
 
       - name: npm install, build
         run: |
