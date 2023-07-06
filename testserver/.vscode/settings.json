@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/d0805a6e-8cea-4f36-acf4-54286c2bde50/resourceGroups/GadgetDev/providers/Microsoft.Web/sites/TestingGS",
+    "appService.deploySubpath": "myExpressApp"
+}
