@@ -5,7 +5,7 @@ const SESSION_STORAGE_KEY = 'order_names';
 
 async function submitOrder(order) {
   const orderWithStatus = { ...order, status: "Pending" };
-  const response = await fetch('/api/orders', {
+  const response = await fetch('https://hopaserver.azurewebsites.net/api/orders', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -13,7 +13,7 @@ async function submitOrder(order) {
     body: JSON.stringify(orderWithStatus),
   });
   if (!response.ok) {
-    throw new Error('Failed to submit order');
+    //throw new Error('Failed to submit order');
   }
   const data = await response.json();
   return data;

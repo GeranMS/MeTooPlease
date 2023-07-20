@@ -7,7 +7,7 @@ function App() {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch('/api/orders');
+      const response = await fetch('https://hopaserver.azurewebsites.net/api/orders');
       const data = await response.json();
       setOrders(data);
     } catch (error) {
