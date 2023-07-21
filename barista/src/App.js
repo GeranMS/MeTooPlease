@@ -30,7 +30,7 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: 'Completed' }),
       };
-      const response = await fetch(`/api/orders/${orderId}/status`, requestOptions);
+      const response = await fetch(`https://hopaserver.azurewebsites.net/api/orders/${orderId}/status`, requestOptions);
       const updatedOrder = await response.json();
       setOrders((prevOrders) =>
         prevOrders.map((order) => (order._id === updatedOrder._id ? updatedOrder : order))
@@ -48,7 +48,7 @@ function App() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ status: 'Completed' }),
         };
-        const response = await fetch(`/api/orders/${order._id}/status`, requestOptions);
+        const response = await fetch(`https://hopaserver.azurewebsites.net/api/orders/${order._id}/status`, requestOptions);
         const updatedOrder = await response.json();
         return updatedOrder;
       });
